@@ -265,6 +265,14 @@ window.addEventListener("hashchange",()=>{render();window.scrollTo(0,0)});
 (async()=>{try{const db=await claude.use("db");if(!db){off();return}dbDoc=db.doc("sicantik/main");dbDoc.onSnapshot(s=>{if(syncSt!=="ok"){syncSt="ok";if(!auth&&!/INPUT/.test(document.activeElement.tagName))render()}if(!s.exists||s.metadata.hasPendingWrites)return;try{const n=norm(JSON.parse(s.data().json));if((n.rev||0)<(ALL.rev||0)||JSON.stringify(n)===JSON.stringify(ALL))return;ALL=n;sync();try{localStorage.setItem(KEY,JSON.stringify(ALL))}catch(e){}if(!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))render()}catch(e){}},()=>off())}catch(e){off()}})();
 function off(){syncSt="off";if(!/INPUT/.test(document.activeElement.tagName))render()}
 render();
+</script> 
+<script>
+  // Konfigurasi koneksi Supabase
+  const SUPABASE_URL = 'https://fzjhsdjtizbhstgwvcqm.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_3pts9olbIH8UoKlNZa5Ckg_KQwVv...';
+
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 </script>
+
 </body>
 </html>
